@@ -1,0 +1,12 @@
+---
+# tasks file for Python
+- name: Include task if it's Ubuntu System
+  include_tasks: install_DebianSystem.yml 
+  when: ansible_distribution == "Ubuntu"
+
+- name: Include task if it's Centos System
+  include_tasks: install_RedhatSystem.yml
+  when: ansible_distribution == "CentOS"
+
+- import_tasks: create_env.yml
+

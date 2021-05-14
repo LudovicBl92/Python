@@ -1,0 +1,10 @@
+---
+
+ - name: update host
+   yum:
+     update_cache: yes
+
+ - name: install latest version Python and tools
+   yum:
+    name: ['python3-pip', 'python3-devel.x86_64', 'gcc', 'gcc-c++', 'kernel-devel', 'make', 'openssl-devel', 'libffi-devel']
+    state: latest

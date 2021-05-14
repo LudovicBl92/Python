@@ -1,0 +1,34 @@
+---
+
+ - name: Include the username variable
+   include_vars:
+    file: main.yml
+
+ - name: Create the user == {{ name }} with username variable 
+   user: 
+    name: "{{ name }}"
+    password: "{{ passwd | password_hash('sha512') }}"
+
+ - name: Create directory {{ road }} for environments
+   file:
+    path: "{{ road }}"
+    state: directory
+
+ - name: Create {{ road }}{{ name }} in devpython for the developer environments
+   file:
+    path: "{{ road }}{{ name }}"
+    state: directory
+
+ - name: Create environment {{ road }}{{ name }}/First_environment for the developer 
+   shell: python3 -m venv "{{ road }}{{ name }}"/First_environment
+   become: yes
+
+ - name: Copy template file hello.py in {{ road }}{{ name }}/First_environment/
+   copy:
+    src: /etc/ansible/roles/Python/files/hello.py
+    dest: "{{ road }}{{ name }}/First_environment/"
+
+ - name: Copy file README.md in {{ road }}{{ name }}/First_environment/
+   copy:
+    src: /etc/ansible/roles/Python/files/README.md
+    dest: "{{ road }}{{ name }}/First_environment/"
