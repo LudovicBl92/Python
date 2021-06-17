@@ -1,9 +1,5 @@
 ---
 
- - name: Include the username variable
-   include_vars:
-    file: main.yml
-
  - name: Create the user == {{ name }} with username variable 
    user: 
     name: "{{ name }}"
